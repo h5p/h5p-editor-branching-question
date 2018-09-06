@@ -23,7 +23,6 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
         'class': 'h5p-editor-branching-question',
       });
 
-      console.log("what is our fields ?", this.field.fields);
       H5PEditor.processSemanticsChunk(
         this.field.fields,
         this.params,
@@ -31,9 +30,7 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
         this
       );
 
-      console.log("SETTING VALUE OF BRANCHING QUESTION EDIOTR.... yikes");
       this.setValue(this.field, this.params);
-
       $wrapper.append(this.$editor);
     };
 
@@ -46,14 +43,11 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
     };
 
     this.setAlternatives = function (addHtmlCallback) {
-      // Add selector whenever the list is modified
-      // Find list
       var listIndex = this.field.fields.findIndex(function (field) {
         return field.name === 'alternatives';
       });
       var list = this.children[listIndex];
       list.on('addedItem', function () {
-        console.log("added item to list!");
         this.replaceContentIdWithSelector(addHtmlCallback);
       }.bind(this));
 
@@ -74,8 +68,6 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
         // Hide next content id fields
         nextContentId.style.display = 'none';
 
-        // TODO: Use current value of nextContentId to determine
-        // what the selected element in the select should be.
         var input = nextContentId.querySelector('.h5peditor-text');
         var nextContentIdValue = input.value;
         var selectorWrapper = document.createElement('div');
