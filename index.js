@@ -89,7 +89,11 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
      * @returns {boolean}
      */
     this.validate = function () {
-      return true;
+      var valid = true;
+      for (var i = 0; i < this.children.length; i++) {
+        valid = valid && this.children[i].validate();
+      }
+      return valid;
     };
   }
 
