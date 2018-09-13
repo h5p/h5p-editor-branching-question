@@ -34,14 +34,34 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
       $wrapper.append(this.$editor);
     };
 
+    /**
+     * Update next content id field
+     *
+     * @param listIndex
+     * @param nextContentId
+     */
     this.setNextContentId = function (listIndex, nextContentId) {
       var nextContentIds = this.$editor[0].querySelectorAll('.field-name-nextContentId');
       var input = nextContentIds[listIndex].querySelector('.h5peditor-text');
       input.value = nextContentId;
       input.dispatchEvent(new Event('change'));
       this.setValue(this.field, this.params);
+
+      var alternativeWrapper = input.closest('.content');
+      if (parseInt(nextContentId) === -1) {
+        alternativeWrapper.classList.remove('hide-score');
+      }
+      else {
+        alternativeWrapper.classList.add('hide-score');
+      }
     };
 
+    /**
+     * Set available alternatives that will replace the number field for
+     * next content id.
+     *
+     * @param addHtmlCallback
+     */
     this.setAlternatives = function (addHtmlCallback) {
       var listIndex = this.field.fields.findIndex(function (field) {
         return field.name === 'alternatives';
@@ -54,6 +74,11 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
       this.replaceContentIdWithSelector(addHtmlCallback);
     };
 
+    /**
+     * Replaces next content id number field with a selector of available alts
+     *
+     * @param addHtmlCallback
+     */
     this.replaceContentIdWithSelector = function (addHtmlCallback) {
       var nextContentIds = this.$editor[0].querySelectorAll('.field-name-nextContentId');
       for (var i = 0; i < nextContentIds.length; i++) {
@@ -77,6 +102,9 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
       }
     };
 
+    /**
+     * Remove widget from DOM
+     */
     this.remove = function () {
       if (this.$editor) {
         this.$editor.remove();
@@ -84,7 +112,7 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
     };
 
     /**
-     * Always valid
+     * Validate all children
      *
      * @returns {boolean}
      */
