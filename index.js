@@ -85,20 +85,21 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
 
         var nextContentId = nextContentIds[i];
 
-        // Skip if already handled
+        var selectorWrapper;
         if (nextContentId.style.display === 'none') {
-          continue;
+          // Already handled, update DOM
+          selectorWrapper = nextContentId.parentNode.querySelector('.h5p-next-branch-wrapper');
+        }
+        else {
+          // Hide next content id fields
+          nextContentId.style.display = 'none';
+
+          selectorWrapper = document.createElement('div');
+          selectorWrapper.classList.add('h5p-next-branch-wrapper');
+          nextContentId.parentNode.insertBefore(selectorWrapper, nextContentId);
         }
 
-        // Hide next content id fields
-        nextContentId.style.display = 'none';
-
-        var input = nextContentId.querySelector('.h5peditor-text');
-        var nextContentIdValue = input.value;
-        var selectorWrapper = document.createElement('div');
-        selectorWrapper.classList.add('h5p-next-branch-wrapper');
-        nextContentId.parentNode.insertBefore(selectorWrapper, nextContentId);
-        addHtmlCallback(nextContentIdValue, selectorWrapper, i);
+        addHtmlCallback(i, selectorWrapper);
       }
     };
 
