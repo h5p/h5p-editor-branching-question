@@ -70,9 +70,34 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
       var list = this.children[listIndex];
       list.on('addedItem', function () {
         this.replaceContentIdWithSelector(addHtmlCallback);
+        this.addFeedbackGroupDescription();
       }.bind(this));
 
       this.replaceContentIdWithSelector(addHtmlCallback);
+      this.addFeedbackGroupDescription();
+    };
+
+    /**
+     * Add feedback group description for each alternative.
+     */
+    this.addFeedbackGroupDescription = function () {
+      const feedbackGroups = this.$editor[0].querySelectorAll('.field-name-feedback');
+      for (let i = 0; i < feedbackGroups.length; i++) {
+        const feedbackGroup = feedbackGroups[i];
+
+        // Skip descriptions that have already been added
+        if (feedbackGroup.querySelector('.h5p-feedback-description')) {
+          continue;
+        }
+
+        const description = document.createElement('div');
+        description.classList.add('h5p-feedback-description');
+        description.classList.add('h5peditor-field-description');
+        description.textContent = 'It is recommended to provide a feedback after each alternative. This will ensure a better learning experience for the viewer.';
+
+        const groupWrapper = feedbackGroup.querySelector('.content');
+        groupWrapper.prepend(description);
+      }
     };
 
     /**
