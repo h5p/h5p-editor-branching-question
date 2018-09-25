@@ -27,7 +27,8 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
         this.field.fields,
         this.params,
         this.$editor,
-        this
+        this,
+        (parent.currentLibrary || '')
       );
 
       this.setValue(this.field, this.params);
