@@ -125,7 +125,11 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
           nextContentId.parentNode.insertBefore(selectorWrapper, nextContentId);
         }
 
-        addHtmlCallback(i, selectorWrapper);
+        this.children[1].forEachChild((child, index) => {
+          if (index === i) {
+            addHtmlCallback(i, selectorWrapper, child.children[2]);
+          }
+        });
       }
     };
 
