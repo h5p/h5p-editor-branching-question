@@ -64,9 +64,14 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
      * @param addHtmlCallback
      */
     this.setAlternatives = function (addHtmlCallback) {
-      var listIndex = this.field.fields.findIndex(function (field) {
-        return field.name === 'alternatives';
-      });
+      var listIndex;
+      for (let i = 0; i < this.field.fields.length; i++) {
+        if (this.field.fields[i].name === 'alternatives') {
+          listIndex = i;
+          break;
+        }
+      }
+
       var list = this.children[listIndex];
       list.on('addedItem', function () {
         this.replaceContentIdWithSelector(addHtmlCallback);
