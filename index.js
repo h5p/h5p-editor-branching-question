@@ -125,7 +125,7 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
           nextContentId.parentNode.insertBefore(selectorWrapper, nextContentId);
         }
 
-        this.children[1].forEachChild((child, index) => {
+        this.children[1].forEachChild(function (child, index) {
           if (index === i) {
             addHtmlCallback(i, selectorWrapper, child.children[2]);
           }
