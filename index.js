@@ -45,10 +45,10 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
       var nextContentIds = this.$editor[0].querySelectorAll('.field-name-nextContentId');
       var input = nextContentIds[listIndex].querySelector('.h5peditor-text');
       input.value = nextContentId;
-      input.dispatchEvent(new Event('change'));
+      H5P.jQuery(input).trigger('change');
       this.setValue(this.field, this.params);
 
-      var alternativeWrapper = input.closest('.content');
+      var alternativeWrapper = H5P.jQuery(input).closest('.content')[0];
       if (parseInt(nextContentId) === -1) {
         alternativeWrapper.classList.remove('hide-score');
       }
@@ -101,7 +101,7 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
         description.textContent = 'It is recommended to provide feedback that motivates and also provides guidance. Leave all fields empty if you don\'t want the user to get feedback after choosing this alternative/viewing this content.';
 
         const groupWrapper = feedbackGroup.querySelector('.content');
-        groupWrapper.prepend(description);
+        groupWrapper.insertBefore(description, groupWrapper.firstChild);
       }
     };
 
