@@ -3,6 +3,7 @@ var H5PEditor = H5PEditor || {};
 H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($, EventDispatcher) {
 
   function BranchingQuestionEditor(parent, field, params, setValue) {
+    const self = this;
     this.parent = parent;
     this.field = field;
     this.params = params || {};
@@ -130,11 +131,25 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
           nextContentId.parentNode.insertBefore(selectorWrapper, nextContentId);
         }
 
-        this.children[1].forEachChild(function (child, index) {
+        findList('alternatives').forEachChild(function (child, index) {
           if (index === i) {
-            addHtmlCallback(i, selectorWrapper, child.children[2]);
+            addHtmlCallback(i, selectorWrapper, H5PEditor.findField('feedback', child));
           }
         });
+      }
+    };
+
+    /**
+     * A small helper for finding list widgets.
+     *
+     * @param {string} path
+     * @return {Object}
+     */
+    const findList = function (path) {
+      for (let i = 0; i < self.children.length; i++) {
+        if (self.children[i].getName && self.children[i].getName() === path) {
+          return self.children[i];
+        }
       }
     };
 
