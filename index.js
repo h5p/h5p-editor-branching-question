@@ -96,10 +96,17 @@ H5PEditor.widgets.branchingQuestion = H5PEditor.BranchingQuestion = (function ($
           continue;
         }
 
+        const feedbackDescriptionId = H5PEditor.getDescriptionId(H5PEditor.getNextFieldId({
+          name: 'feedback'
+        }));
+
         const description = document.createElement('div');
+        description.setAttribute('id', feedbackDescriptionId);
         description.classList.add('h5p-feedback-description');
         description.classList.add('h5peditor-field-description');
         description.textContent = 'It is recommended to provide feedback that motivates and also provides guidance. Leave all fields empty if you don\'t want the user to get feedback after choosing this alternative/viewing this content.';
+
+        feedbackGroup.querySelector('.title').setAttribute('aria-describedby', feedbackDescriptionId);
 
         const groupWrapper = feedbackGroup.querySelector('.content');
         groupWrapper.insertBefore(description, groupWrapper.firstChild);
