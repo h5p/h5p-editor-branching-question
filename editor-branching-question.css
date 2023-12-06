@@ -1,0 +1,11 @@
+.h5p-editor-branching-question > .field-name-media .h5p-video-editor .field-name-fit {
+  display: none;
+}
+
+.h5p-editor-branching-question > .field-name-media .h5p-audio-editor .field-name-playerMode {
+  display: none;
+}
+
+.h5p-editor-branching-question > .field-name-media .h5p-audio-editor .h5p-editor-widget-show-when:has(.field-name-fitToWrapper) {
+  display: none;
+}
