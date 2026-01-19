@@ -8,7 +8,7 @@
   "author": "thomasmars",
   "coreApi": {
     "majorVersion": 1,
-    "minorVersion": 24
+    "minorVersion": 28
   },
   "preloadedJs": [
     {
