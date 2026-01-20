@@ -164,11 +164,7 @@ H5PEditor.BranchingQuestion = (function ($, EventDispatcher, Branch) {
      * Collapse all feedback groups
      */
     this.collapseListAlternatives = function () {
-      // Note: Relies on the specific order of semantics, since List for some
-      // reason doesn't have a field that can be used for lookup.
-      // Be sure to update this when semantics are changed.
-      const alternatives = this.children[1];
-      alternatives.forEachChild(function (child) {
+      findList('alternatives').forEachChild(function (child) {
         child.collapse();
       });
     };
